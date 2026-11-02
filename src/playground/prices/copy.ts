@@ -1,0 +1,56 @@
+export const priceCopy = {
+  en: {
+    asset: "Asset price",
+    token: "Contract token price",
+    network: "Network",
+    contract: "Token contract",
+    coin: "Asset",
+    note: "Reference USD price per whole coin/token, not a trade quote. A 30-second cache may be used. Source quotes older than 10 minutes or with confidence below 0.9 are rejected. Coverage varies by contract.",
+    updated: "Source updated",
+    fetched: "Fetched by 0xbot",
+    cached: "Cached",
+    fresh: "Fetched",
+    source: "Source",
+    confidence: "Source confidence (not a safety rating)",
+    snapshot: "Submitted parameters",
+    changed: "Parameters changed. Run again to update the result.",
+    errors: {
+      price_not_found:
+        "No price is available for this exact asset. This is not a zero price.",
+      price_stale: "The source quote is too old to use.",
+      price_low_confidence:
+        "The source confidence is below the accepted threshold.",
+      rate_limited: "Price query limit reached. Try again in a minute.",
+      invalid_request:
+        "Select BTC, ETH or BNB, or a supported network and nonzero token contract.",
+      provider_unavailable: "The price source is currently unavailable.",
+      unsupported_provider:
+        "This route does not support the requested price query.",
+    },
+  },
+  zh: {
+    asset: "主流币价格",
+    token: "合约代币价格",
+    network: "网络",
+    contract: "代币合约",
+    coin: "资产",
+    note: "每整币/代币的美元参考行情，不是可成交报价。可能使用30秒缓存；拒绝超过10分钟或置信度低于0.9的上游报价，不保证每个合约都有行情。",
+    updated: "来源更新时间",
+    fetched: "0xbot 获取时间",
+    cached: "缓存结果",
+    fresh: "本次获取",
+    source: "来源",
+    confidence: "来源置信度（不是安全评级）",
+    snapshot: "提交参数",
+    changed: "参数已修改，请重新查询。",
+    errors: {
+      price_not_found: "该准确资产暂无价格，不代表价格为零。",
+      price_stale: "来源报价已过期，不能作为当前行情使用。",
+      price_low_confidence: "来源报价置信度不足。",
+      rate_limited: "价格查询达到限额，请一分钟后重试。",
+      invalid_request: "请选择BTC、ETH、BNB，或支持的网络及非零代币合约。",
+      provider_unavailable: "价格源暂时不可用。",
+      unsupported_provider: "该线路不支持本次价格查询。",
+    },
+  },
+};

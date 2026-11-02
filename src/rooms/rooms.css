@@ -1,0 +1,57 @@
+.room-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+.room-card {
+  color: inherit;
+  text-decoration: none;
+  display: grid;
+  gap: 12px;
+}
+.room-layout {
+  display: grid;
+  grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+.room-member {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  border-bottom: 1px solid var(--line, #e1d5c6);
+  padding: 10px 0;
+}
+.room-member small {
+  overflow-wrap: anywhere;
+}
+.room-transcript {
+  display: grid;
+  gap: 12px;
+  max-height: 65vh;
+  overflow: auto;
+}
+.room-body {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font: inherit;
+  line-height: 1.7;
+  margin-top: 12px;
+}
+.room-layout textarea {
+  width: 100%;
+  resize: vertical;
+}
+.fields fieldset {
+  border: 0;
+  padding: 0;
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+}
+@media (max-width: 800px) {
+  .room-layout {
+    grid-template-columns: 1fr;
+  }
+}
