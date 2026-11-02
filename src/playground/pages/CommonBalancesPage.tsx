@@ -10,7 +10,11 @@ export function CommonBalancesPage() {
   const form = useBalanceForm("data.balances");
   const tokens = useTokens();
   const options =
-    tokens.data?.filter((token) => token.network === form.input.network) || [];
+    tokens.data?.filter(
+      (token) =>
+        token.network === form.input.network &&
+        token.asset_class === "stablecoin",
+    ) || [];
   return (
     <BalanceQueryFrame
       title={playgroundCopy[lang].common}

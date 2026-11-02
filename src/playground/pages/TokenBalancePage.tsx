@@ -12,7 +12,11 @@ export function TokenBalancePage() {
   const tokens = useTokens();
   const [contract, setContract] = useState("");
   const options =
-    tokens.data?.filter((token) => token.network === form.input.network) || [];
+    tokens.data?.filter(
+      (token) =>
+        token.network === form.input.network &&
+        token.asset_class === "stablecoin",
+    ) || [];
   const selected = options.find((token) => token.contract === contract);
   const body = { ...form.input, contract };
   return (

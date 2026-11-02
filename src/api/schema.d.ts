@@ -1117,6 +1117,38 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/data/rwa/token-balance": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["rwaTokenBalance"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/prices/equity": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["equityPrice"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -1884,6 +1916,15 @@ export interface components {
             symbol: string;
             /** @enum {string} */
             variant: "issuer-native" | "binance-peg" | "usdt0";
+            /**
+             * @description stablecoin or tokenized_equity
+             * @enum {string}
+             */
+            asset_class: "stablecoin" | "tokenized_equity";
+            /** @description Underlying stock ticker for tokenized_equity entries */
+            underlying?: string;
+            /** @description Tokenized-equity issuer */
+            issuer?: string;
         };
         TokenBalanceInput: {
             address: components["schemas"]["BalanceInput"]["address"];
@@ -1969,6 +2010,27 @@ export interface components {
         VerifyInput: {
             id: string;
             signature: string;
+        };
+        RWATokenBalanceInput: {
+            address: components["schemas"]["BalanceInput"]["address"];
+            /** @description Allowlisted tokenized-equity contract (asset_class=tokenized_equity) from GET /v1/tokens */
+            contract: string;
+            /**
+             * @description Ethereum in the first release
+             * @enum {string}
+             */
+            network: "eip155:1";
+            provider?: components["schemas"]["BalanceInput"]["provider"];
+        };
+        EquityPriceInput: {
+            /** @description Allowlisted tokenized-equity contract (asset_class=tokenized_equity) from GET /v1/tokens */
+            contract: string;
+            /**
+             * @description Ethereum in the first release
+             * @enum {string}
+             */
+            network: "eip155:1";
+            provider?: string;
         };
     };
     responses: never;
@@ -4177,6 +4239,72 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["Usage"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    rwaTokenBalance: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["RWATokenBalanceInput"];
+            };
+        };
+        responses: {
+            /** @description Exact tokenized-equity balance; on-chain observation, not eligibility */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BalanceResult"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    equityPrice: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["EquityPriceInput"];
+            };
+        };
+        responses: {
+            /** @description Reference USD price of the underlying stock; not an executable quote */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PriceResult"];
                 };
             };
             /** @description Error */
